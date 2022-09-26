@@ -20,11 +20,17 @@ app.get('/api/getLetra/:num',(req, res)=>{
 });
 
 app.get('/api/getPalabra/:num', (req, res)=>{
-    const num = req.params.num;
-    const texto = frase.split(" ");
-    const resul = texto.substring(0,num);
+//    const num = req.params.num;
+    const a = frase.split(" ");
+    //const resul = texto.substring(0,num);
+    const opcion = parseInt(req.params.num);
 
-    res.send(JSON.stringify(resul));
+    if(opcion < 0 || opcion >= 4){
+        return res
+        .status(400)
+        .json({mensaje: "no esta dentro de los parametros permitidos"});
+    }
+    res.status(200).send(a[opcion]);
 });
 
 
